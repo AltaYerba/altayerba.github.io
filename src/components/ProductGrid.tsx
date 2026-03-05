@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import { Product } from '../types';
+import { formatPrice } from '../utils';
 
 interface ProductGridProps {
   products: Product[];
-  onAddToCart: (product: Product) => void;
+  onSelectProduct: (product: Product) => void;
 }
 
-export default function ProductGrid({ products, onAddToCart }: ProductGridProps) {
+export default function ProductGrid({ products, onSelectProduct }: ProductGridProps) {
   const [filter, setFilter] = useState<string>('Todos');
 
   const categories = ['Todos', 'Con Palo', 'Sin Palo', 'Barbacuá', 'Saborizadas'];
@@ -47,13 +48,14 @@ export default function ProductGrid({ products, onAddToCart }: ProductGridProps)
           {filteredProducts.map(product => (
             <div
               key={product.id}
-              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-wood/10 hover:shadow-lg transition-all duration-300 group flex flex-col"
+              onClick={() => onSelectProduct(product)}
+              className="bg-white rounded-2xl overflow-hidden shadow-sm border border-wood/10 hover:shadow-xl transition-all duration-300 group flex flex-col cursor-pointer transform hover:-translate-y-1"
             >
-              <div className="relative h-64 overflow-hidden bg-cream-dark">
+              <div className="relative h-72 overflow-hidden bg-cream-dark">
                 <img
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   referrerPolicy="no-referrer"
                 />
                 <div className="absolute top-4 left-4 bg-cream/90 backdrop-blur-sm px-3 py-1 rounded-full text-xs font-bold text-forest uppercase tracking-wider">
@@ -62,22 +64,20 @@ export default function ProductGrid({ products, onAddToCart }: ProductGridProps)
               </div>
               
               <div className="p-6 flex flex-col flex-grow">
-                <h3 className="text-xl font-serif font-bold text-wood-dark mb-2">
+                <h3 className="text-2xl font-serif font-bold text-wood-dark mb-2 group-hover:text-forest transition-colors">
                   {product.name}
                 </h3>
-                <p className="text-wood-dark/70 text-sm mb-4 flex-grow">
+                <p className="text-wood-dark/70 text-sm mb-6 flex-grow line-clamp-2">
                   {product.description}
                 </p>
-                <div className="flex items-center justify-between mt-auto">
+                <div className="flex items-center justify-between mt-auto pt-4 border-t border-wood/10">
                   <span className="text-2xl font-bold text-forest">
-                    ${product.price.toFixed(2)}
+                    {formatPrice(product.price)}
                   </span>
-                  <button
-                    onClick={() => onAddToCart(product)}
-                    className="bg-wood hover:bg-wood/90 text-cream px-4 py-2 rounded-lg font-medium transition-colors"
-                  >
-                    Añadir
-                  </button>
+                  <span className="text-wood font-medium group-hover:text-forest transition-colors flex items-center gap-1">
+                    Ver Detalles
+                    <span className="transform group-hover:translate-x-1 transition-transform">→</span>
+                  </span>
                 </div>
               </div>
             </div>

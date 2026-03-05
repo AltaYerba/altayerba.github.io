@@ -1,0 +1,19 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-forest: #1a5c28; /* Verde oscuro de las zapatillas */
+  --color-forest-dark: #11401b;
+  --color-forest-muted: #6b8268; /* Verde apagado del fondo del logo */
+  --color-cream: #f4f4f0; /* Blanco roto/crema de los guantes y letras */
+  --color-cream-dark: #e6e6e0;
+  --color-wood: #c2693f; /* Naranja/marrón del mate */
+  --color-wood-dark: #222222; /* Gris oscuro/negro de las extremidades y sombras */
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-wood-dark);
+}
